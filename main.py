@@ -1,13 +1,16 @@
+# connecting needed libraries
 from stegano import lsb
 import os
 from colorama import init, Fore, Back, Style
 from pyfiglet import Figlet
 
+# creating color constants
 ERROR = Fore.RED
 RST = Style.RESET_ALL
 MSG = Fore.YELLOW
 APRV = Fore.GREEN
 
+# function to add add secret text to the picture
 def add_text_to_picture(p_path, text, n_path):
     try:
         secret = lsb.hide(p_path, text)
@@ -19,12 +22,14 @@ def add_text_to_picture(p_path, text, n_path):
     except Exception as ex:
         return f'\n{ERROR}[-] {ex}\n{RST}'
 
+# function to get hidden text from the picture
 def get_hidden_text(p_path):
     try:
         return lsb.reveal(p_path)
     except Exception as ex:
         return f'\n{ERROR}[-] {ex}\n{RST}'
 
+# function to show hidden text from the picture
 def show_result(text):
     arr = text.split(', ')
     print('\nHidden text is:')
@@ -32,6 +37,7 @@ def show_result(text):
         print(i)
     print('\n')
 
+# function to request password to see hidden text
 def password(f_path):
     isPassword = False
     result = ''
@@ -44,10 +50,12 @@ def password(f_path):
             isPassword = True
     return result
 
+# function to see the manual of program
 def help():
     dash = '-'   
     return f'\n{dash*33}{MSG}\nadd{RST} - add text to the picture\n{MSG}read{RST} - read text in the picture\n{MSG}exit{RST} - close program\n{dash*33}\n'
 
+# main function
 def main():
     init()
     preview = Figlet(font='slant')
